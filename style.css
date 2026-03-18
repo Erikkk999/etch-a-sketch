@@ -20,3 +20,7 @@ body {
     height: 49px;
     outline: 1px inset #000000;
 }
+
+.hover {
+    background-color: #000000;
+}
