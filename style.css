@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-container {
+    width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.square {
+    width: 49px;
+    height: 49px;
+    outline: 1px inset #000000;
+}
