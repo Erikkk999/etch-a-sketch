@@ -8,13 +8,15 @@ gridContainer.addEventListener("mousedown", (e) => {
     if (e.target.classList.contains("square")) {
         drawing = true;
         e.target.classList.add("hover");
-    }
+        darkenSquares(e.target);
+    }        
 });
 
 gridContainer.addEventListener("mouseover", (e) => {
     if (drawing && e.target.classList.contains("square")) {
         e.target.classList.add("hover");
-    }
+        darkenSquares(e.target);
+    }    
 });
 
 window.addEventListener("mouseup", () => {
@@ -39,3 +41,14 @@ resizeBtn.addEventListener("click", () => {
         gridContainer.appendChild(square);
     }   
 });
+
+function darkenSquares(element) {
+
+    if (!element.style.opacity) element.style.opacity = "0";
+
+    let opacity = parseFloat(element.style.opacity);
+    if (opacity < 1) {
+        element.style.opacity = opacity + 0.1;
+    }
+}
+
