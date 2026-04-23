@@ -3,8 +3,10 @@ const resizeBtn = document.querySelector(".resize");
 
 let drawing = false;
 
-gridContainer.addEventListener("mousedown", (e) => {
+gridContainer.addEventListener("pointerdown", (e) => {
     e.preventDefault();
+    e.target.releasePointerCapture(e.pointerId);
+    
     if (e.target.classList.contains("square")) {
         drawing = true;
         e.target.classList.add("hover");
@@ -12,14 +14,14 @@ gridContainer.addEventListener("mousedown", (e) => {
     }        
 });
 
-gridContainer.addEventListener("mouseover", (e) => {
+gridContainer.addEventListener("pointerover", (e) => {
     if (drawing && e.target.classList.contains("square")) {
         e.target.classList.add("hover");
         darkenSquares(e.target);
     }    
 });
 
-window.addEventListener("mouseup", () => {
+window.addEventListener("pointerup", () => {
     drawing = false;
 });
 
@@ -43,7 +45,6 @@ resizeBtn.addEventListener("click", () => {
 });
 
 function darkenSquares(element) {
-
     if (!element.style.opacity) element.style.opacity = "0";
 
     let opacity = parseFloat(element.style.opacity);
