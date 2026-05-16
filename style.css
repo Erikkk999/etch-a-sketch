@@ -30,7 +30,8 @@ body {
 }
 
 .hover {
-    background-color: #000000;
+    opacity: var(--opacity);
+    background-color: var(--color, #000);
     outline: none;
 }
 

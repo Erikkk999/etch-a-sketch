@@ -11,6 +11,7 @@ gridContainer.addEventListener("pointerdown", (e) => {
         drawing = true;
         e.target.classList.add("hover");
         darkenSquares(e.target);
+        makeRainbowSquares(e.target);
     }        
 });
 
@@ -18,6 +19,7 @@ gridContainer.addEventListener("pointerover", (e) => {
     if (drawing && e.target.classList.contains("square")) {
         e.target.classList.add("hover");
         darkenSquares(e.target);
+        makeRainbowSquares(e.target);
     }    
 });
 
@@ -33,7 +35,7 @@ resizeBtn.addEventListener("click", () => {
 
 function createGrid(input = 64) {
     const gridSize = parseInt(input);
-    if (isNaN(gridSize) || gridSize > 100 || gridSize <= 1) return;
+    if (isNaN(gridSize) || gridSize > 100 || gridSize < 2) return;
 
     gridContainer.replaceChildren();
     gridContainer.style.setProperty("--column", gridSize);
@@ -48,12 +50,19 @@ function createGrid(input = 64) {
 }
 
 function darkenSquares(element) {
-    if (!element.style.opacity) element.style.opacity = "0";
+    let opacity = parseFloat(element.dataset.opacity) || 0;
 
-    let opacity = parseFloat(element.style.opacity);
     if (opacity < 1) {
-        element.style.opacity = opacity + 0.1;
+        opacity = (opacity + 0.1).toFixed(1);
+        element.dataset.opacity = opacity; 
+        element.style.setProperty("--opacity", opacity);
     }
+}
+
+function makeRainbowSquares(element) {
+    const randomColor = `#${Math.floor(Math.random() * 16777215)
+        .toString(16).padStart(6, '0')}`;
+    element.style.setProperty("--color", randomColor);
 }
 
 createGrid();
